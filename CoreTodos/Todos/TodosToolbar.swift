@@ -2,6 +2,8 @@ import SwiftUI
 import SwiftUI
 
 extension TodosView  {
+  
+  // MARK: - Toolbar
   @ToolbarContentBuilder
   func toolbar() -> some ToolbarContent {
     if vm.isEditing {
@@ -12,6 +14,7 @@ extension TodosView  {
     }
   }
   
+  // MARK: - Editing Toolbar
   @ToolbarContentBuilder
   func editingToolbar() -> some ToolbarContent {
     ToolbarItemGroup(placement: .navigationBarLeading) {
@@ -50,6 +53,7 @@ extension TodosView  {
     }
   }
   
+  // MARK: - Non-Editing Toolbar
   @ToolbarContentBuilder
   func nonEditingToolbar() -> some ToolbarContent {
     ToolbarItemGroup(placement: .primaryAction) {

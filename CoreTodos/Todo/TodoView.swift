@@ -18,6 +18,7 @@ struct TodoView: View {
     .foregroundColor(vm.todo.isComplete ? .gray : nil)
   }
 }
+
 // MARK: - Previews
 struct TodoView_Previews: PreviewProvider {
   static var previews: some View {

@@ -166,7 +166,10 @@ extension TodosViewModel {
   enum Destination {
     case alert(AlertState<AlertAction>)
   }
-  
+}
+
+// MARK: - AlertAction
+extension TodosViewModel {
   enum AlertAction {
     case confirmChanges
     case cancelChanges
