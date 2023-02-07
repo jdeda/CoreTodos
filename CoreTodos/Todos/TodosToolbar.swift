@@ -56,7 +56,23 @@ extension TodosView  {
   // MARK: - Non-Editing Toolbar
   @ToolbarContentBuilder
   func nonEditingToolbar() -> some ToolbarContent {
-    ToolbarItemGroup(placement: .primaryAction) {
+    ToolbarItemGroup(placement: .navigationBarLeading) {
+      HStack(spacing: 0) {
+        Button {
+          vm.undoButtonTapped()
+        } label: {
+          Image(systemName: "arrow.uturn.backward")
+        }
+        .disabled(!vm.cdc.canUndo)
+        Button {
+          vm.redoButtonTapped()
+        } label: {
+          Image(systemName: "arrow.uturn.forward")
+        }
+        .disabled(!vm.cdc.canRedo)
+      }
+    }
+    ToolbarItemGroup(placement: .navigationBarTrailing) {
       Menu {
         Button {
           vm.editButtonTapped()

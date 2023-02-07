@@ -46,10 +46,18 @@ final class TodosViewModel: ObservableObject {
   
   func undoButtonTapped()  {
     cdc.undoCommited()
+    self.todos = {
+      let storedTodos = cdc.fetch()
+      return .init(uniqueElements: storedTodos != nil ? storedTodos! : [])
+    }()
   }
   
   func redoButtonTapped() {
     cdc.redoCommited()
+    self.todos = {
+      let storedTodos = cdc.fetch()
+      return .init(uniqueElements: storedTodos != nil ? storedTodos! : [])
+    }()
   }
   
   func todoCheckBoxTapped(_ todoID: Todo.ID) {

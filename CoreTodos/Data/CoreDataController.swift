@@ -10,6 +10,14 @@ final class CoreDataController: ObservableObject {
     }
   }
   
+  var canUndo: Bool {
+    container.viewContext.undoManager?.canUndo ?? false
+  }
+  
+  var canRedo: Bool {
+    container.viewContext.undoManager?.canRedo ?? false
+  }
+  
   init() {
     container = NSPersistentContainer(name: "CoreTodo")
     container.loadPersistentStores { description, error in
