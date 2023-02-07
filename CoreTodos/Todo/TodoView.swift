@@ -7,13 +7,15 @@ struct TodoView: View {
   var body: some View {
     HStack {
       Button {
-        vm.checkboxToggled()
+        vm.checkboxToggled(vm.todo.id)
       } label: {
         Image(systemName: vm.todo.isComplete ? "checkmark.square" : "square")
       }
       .buttonStyle(.plain)
-      
-      TextField("Untitled Todo", text: $vm.todo.description)
+      TextField("Untitled Todo", text: .init(
+        get: { vm.todo.description },
+        set: { vm.descriptionChanged(vm.todo.id, $0) }
+      ))
     }
     .foregroundColor(vm.todo.isComplete ? .gray : nil)
   }
@@ -22,6 +24,10 @@ struct TodoView: View {
 // MARK: - Previews
 struct TodoView_Previews: PreviewProvider {
   static var previews: some View {
-    TodoView(vm: .init(todo: .init(id: .init(), description: "Do homework", isComplete: false)))
+    TodoView(vm: .init(
+      todo: .init(id: .init(), description: "Do homework", isComplete: false),
+      checkboxToggled: { _ in },
+      descriptionChanged: { _, _ in }
+    ))
   }
 }

@@ -4,10 +4,15 @@ import SwiftUINavigation
 // MARK: - View
 struct TodosView: View {
   @ObservedObject var vm: TodosViewModel
+  
   var body: some View {
     List(selection: $vm.selected) {
       ForEach(vm.todos) { todo in
-        TodoView(vm: .init(todo: todo))
+        TodoView(vm: .init(
+          todo: todo,
+          checkboxToggled: vm.todoCheckBoxTapped,
+          descriptionChanged: vm.todoDescriptionChanged
+        ))
           .swipeActions(edge: .trailing) {
             Button(role: .destructive) {
               vm.swipeToDeleteCompleted(todo)
@@ -37,7 +42,7 @@ struct TodosView: View {
 struct TodosView_Previews: PreviewProvider {
   static var previews: some View {
     NavigationStack {
-      TodosView(vm : .init(todos: .init(uniqueElements: mockTodos)))
+      TodosView(vm : .init(cdc: .init(), todos: .init(uniqueElements: mockTodos)))
     }
   }
 }

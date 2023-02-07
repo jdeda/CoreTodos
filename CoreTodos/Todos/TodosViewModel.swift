@@ -1,15 +1,18 @@
 import SwiftUI
 import SwiftUINavigation
 import IdentifiedCollections
+import Combine
 
 // MARK: - ViewModel
 final class TodosViewModel: ObservableObject {
+  @Published var cdc: CoreDataController
   @Published var destination: Destination?
   @Published var todos: IdentifiedArrayOf<Todo>
   @Published var backupTodos: IdentifiedArrayOf<Todo>
   @Published var selected: Set<Todo.ID>
   @Published var sort: Sort
   @Published var isEditing: Bool
+  @Published var cancellable: AnyCancellable? = nil
   
   var navigationTitle: String {
     let status = isEditing && selected.count > 0
@@ -17,17 +20,35 @@ final class TodosViewModel: ObservableObject {
   }
   
   init(
+    cdc: CoreDataController,
     destination: Destination? = nil,
-    todos: IdentifiedArrayOf<Todo> = [],
+    todos: IdentifiedArrayOf<Todo>? = nil,
     sort: Sort = .none
   ) {
+    self.cdc = cdc
     self.destination = destination
-    self.todos = todos
+    self.todos = {
+      let storedTodos = cdc.fetch()
+      return .init(uniqueElements: storedTodos != nil ? storedTodos! : [])
+    }()
     self.backupTodos = []
     self.selected = []
     self.sort = .none
     self.isEditing = false
     self.performSort()
+    self.cancellable = self.$todos.sink { [weak self] newTodos in
+      guard let self else { return }
+      if self.isEditing { return }
+      self.cdc.update(newTodos)
+    }
+  }
+  
+  func todoCheckBoxTapped(_ todoID: Todo.ID) {
+    todos[id: todoID]?.isComplete.toggle()
+  }
+  
+  func todoDescriptionChanged(_ todoID: Todo.ID, _ newDescription: String) {
+    todos[id: todoID]?.description = newDescription
   }
   
   func swipeToDeleteCompleted(_ todo: Todo) {
@@ -144,6 +165,7 @@ final class TodosViewModel: ObservableObject {
         backupTodos = []
         destination = nil
         isEditing = false
+        cdc.update(todos)
       }
       break
     case .none:
@@ -155,6 +177,7 @@ final class TodosViewModel: ObservableObject {
         backupTodos = []
         destination = nil
         isEditing = false
+        cdc.update(todos)
       }
       break
     }

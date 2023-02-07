@@ -1,20 +1,22 @@
 import Foundation
 import Tagged
+import XCTestDynamicOverlay
 
 // MARK: - ViewModel
 final class TodoViewModel: ObservableObject {
   @Published var todo: Todo
   
-  init(todo: Todo) {
+  var checkboxToggled: (_ todoID: Todo.ID) -> Void = unimplemented("TodoViewModel.checkboxToggled")
+  var descriptionChanged: (_ todoID: Todo.ID, _ newDescription: String) -> Void = unimplemented("TodoViewModel.checkboxToggled")
+  
+  init(
+    todo: Todo,
+    checkboxToggled: @escaping (_ todoID: Todo.ID) -> Void,
+    descriptionChanged: @escaping (_ todoID: Todo.ID, _ newDescription: String) -> Void
+  ) {
     self.todo = todo
-  }
-  
-  func checkboxToggled() {
-    todo.isComplete.toggle()
-  }
-  
-  func descriptionChanged(_ newDescription: String) {
-    
+    self.checkboxToggled = checkboxToggled
+    self.descriptionChanged = descriptionChanged
   }
 }
 

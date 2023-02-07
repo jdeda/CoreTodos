@@ -20,6 +20,8 @@
 		976DF59629902E5300B79FEC /* TodosToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DF59529902E5300B79FEC /* TodosToolbar.swift */; };
 		976DF5992990415500B79FEC /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DF5982990415500B79FEC /* MockData.swift */; };
 		976DF59D299042FC00B79FEC /* App.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DF59C299042FC00B79FEC /* App.swift */; };
+		976DF5A92991772200B79FEC /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DF5A82991772200B79FEC /* CoreDataController.swift */; };
+		976DF5AC299177B200B79FEC /* CoreTodo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 976DF5AA299177B200B79FEC /* CoreTodo.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +36,8 @@
 		976DF59529902E5300B79FEC /* TodosToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosToolbar.swift; sourceTree = "<group>"; };
 		976DF5982990415500B79FEC /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
 		976DF59C299042FC00B79FEC /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
+		976DF5A82991772200B79FEC /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		976DF5AB299177B200B79FEC /* CoreTodo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreTodo.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +77,7 @@
 				976DF59C299042FC00B79FEC /* App.swift */,
 				976DF59029902B0600B79FEC /* Todos */,
 				976DF58F29902B0100B79FEC /* Todo */,
+				976DF5AD29917B4300B79FEC /* CoreData */,
 				976DF5972990414B00B79FEC /* Common */,
 				976DF5762990283300B79FEC /* Assets.xcassets */,
 				976DF5782990283300B79FEC /* Preview Content */,
@@ -113,6 +118,15 @@
 				976DF5982990415500B79FEC /* MockData.swift */,
 			);
 			path = Common;
+			sourceTree = "<group>";
+		};
+		976DF5AD29917B4300B79FEC /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				976DF5A82991772200B79FEC /* CoreDataController.swift */,
+				976DF5AA299177B200B79FEC /* CoreTodo.xcdatamodeld */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -200,6 +214,8 @@
 				976DF5752990283100B79FEC /* TodoView.swift in Sources */,
 				976DF5732990283100B79FEC /* Main.swift in Sources */,
 				976DF58D29902AFA00B79FEC /* TodosViewModel.swift in Sources */,
+				976DF5A92991772200B79FEC /* CoreDataController.swift in Sources */,
+				976DF5AC299177B200B79FEC /* CoreTodo.xcdatamodeld in Sources */,
 				976DF59D299042FC00B79FEC /* App.swift in Sources */,
 				976DF5992990415500B79FEC /* MockData.swift in Sources */,
 				976DF59629902E5300B79FEC /* TodosToolbar.swift in Sources */,
@@ -448,6 +464,19 @@
 			productName = IdentifiedCollections;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		976DF5AA299177B200B79FEC /* CoreTodo.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				976DF5AB299177B200B79FEC /* CoreTodo.xcdatamodel */,
+			);
+			currentVersion = 976DF5AB299177B200B79FEC /* CoreTodo.xcdatamodel */;
+			path = CoreTodo.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 976DF5672990283100B79FEC /* Project object */;
 }

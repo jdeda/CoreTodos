@@ -12,6 +12,7 @@ struct AppView: View {
 struct AppView_Previews: PreviewProvider {
   static var previews: some View {
     AppView(todosVM: .init(
+      cdc: .init(),
       todos: .init(uniqueElements: mockTodos),
       sort: .none
     ))
