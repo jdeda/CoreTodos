@@ -2,6 +2,7 @@ import SwiftUI
 import SwiftUINavigation
 import IdentifiedCollections
 import Combine
+import Tagged
 
 // MARK: - ViewModel
 final class TodosViewModel: ObservableObject {
@@ -41,6 +42,14 @@ final class TodosViewModel: ObservableObject {
       if self.isEditing { return }
       self.cdc.update(newTodos)
     }
+  }
+  
+  func undoButtonTapped()  {
+    cdc.undoCommited()
+  }
+  
+  func redoButtonTapped() {
+    cdc.redoCommited()
   }
   
   func todoCheckBoxTapped(_ todoID: Todo.ID) {
@@ -184,14 +193,14 @@ final class TodosViewModel: ObservableObject {
   }
 }
 
-// MARK: - Destination
+// MARK: - TodosViewModel.Destination
 extension TodosViewModel {
   enum Destination {
     case alert(AlertState<AlertAction>)
   }
 }
 
-// MARK: - AlertAction
+// MARK: - TodosViewModel.AlertAction
 extension TodosViewModel {
   enum AlertAction {
     case confirmChanges
@@ -199,8 +208,7 @@ extension TodosViewModel {
   }
 }
 
-
-// MARK: - Model
+// MARK: - TodosViewModel.Sort
 extension TodosViewModel {
   enum Sort: CaseIterable, Equatable {
     case completed

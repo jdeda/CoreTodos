@@ -4,7 +4,7 @@ import SwiftUI
 struct Main: App {
     var body: some Scene {
         WindowGroup {
-          AppView(todosVM: .init(cdc: .init()))
+          TodosView(vm: .init(cdc: .init()))
         }
     }
 }

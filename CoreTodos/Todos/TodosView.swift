@@ -6,13 +6,22 @@ struct TodosView: View {
   @ObservedObject var vm: TodosViewModel
   
   var body: some View {
-    List(selection: $vm.selected) {
-      ForEach(vm.todos) { todo in
-        TodoView(vm: .init(
-          todo: todo,
-          checkboxToggled: vm.todoCheckBoxTapped,
-          descriptionChanged: vm.todoDescriptionChanged
-        ))
+    NavigationStack {
+      List(selection: $vm.selected) {
+        ForEach(vm.todos) { todo in
+          HStack {
+            Button {
+              vm.todoCheckBoxTapped(todo.id)
+            } label: {
+              Image(systemName: todo.isComplete ? "checkmark.square" : "square")
+            }
+            .buttonStyle(.plain)
+            TextField("Untitled Todo", text: .init(
+              get: { todo.description },
+              set: { vm.todoDescriptionChanged(todo.id, $0) }
+            ))
+          }
+          .foregroundColor(todo.isComplete ? .gray : nil)
           .swipeActions(edge: .trailing) {
             Button(role: .destructive) {
               vm.swipeToDeleteCompleted(todo)
@@ -23,18 +32,19 @@ struct TodosView: View {
           .deleteDisabled(true)
           .disabled(vm.isEditing)
           .tag(todo.id)
+        }
+        .onMove(perform: vm.move)
+        .onDelete(perform: vm.delete)
       }
-      .onMove(perform: vm.move)
-      .onDelete(perform: vm.delete)
+      .environment(\.editMode, .constant(vm.isEditing ? .active : .inactive))
+      .toolbar { toolbar() }
+      .navigationTitle(vm.navigationTitle)
+      .alert(
+        unwrapping: $vm.destination,
+        case: /TodosViewModel.Destination.alert,
+        action: vm.alertButtonTapped
+      )
     }
-    .environment(\.editMode, .constant(vm.isEditing ? .active : .inactive))
-    .toolbar { toolbar() }
-    .navigationTitle(vm.navigationTitle)
-    .alert(
-      unwrapping: $vm.destination,
-      case: /TodosViewModel.Destination.alert,
-      action: vm.alertButtonTapped
-    )
   }
 }
 

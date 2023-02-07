@@ -23,6 +23,15 @@ final class CoreDataController: ObservableObject {
     todos = []
   }
   
+  func undoCommited() {
+    container.viewContext.undo()
+    save()
+  }
+  func redoCommited() {
+    container.viewContext.redo()
+    save()
+  }
+  
   func deleteAll() {
     let request = NSFetchRequest<CoreTodo>(entityName: "CoreTodo")
     guard let response = try? container.viewContext.fetch(request)

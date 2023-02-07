@@ -61,29 +61,17 @@ extension TodosView  {
         Button {
           vm.editButtonTapped()
         } label: {
-          HStack {
-            Text("Select")
-            Spacer()
-            Image(systemName: "")
-          }
+          Text("Select")
         }
         Button {
           vm.clearCompletedButtonTapped()
         } label: {
-          HStack {
-            Text("Clear completed")
-            Spacer()
-            Image(systemName: "")
-          }
+          Text("Clear completed")
         }
         Button {
           vm.clearAllButtonTapped()
         } label: {
-          HStack {
-            Text("Clear all")
-            Spacer()
-            Image(systemName: "")
-          }
+          Text("Clear all")
         }
         Menu {
           Picker("Sort", selection: .init(
@@ -95,11 +83,7 @@ extension TodosView  {
             }
           }
         } label: {
-          HStack {
-            Text("Sort")
-            Spacer()
-            Image(systemName: "arrow.up.arrow.down")
-          }
+          Text("Sort")
         }
       } label: {
         Image(systemName: "ellipsis.circle")
