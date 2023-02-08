@@ -38,17 +38,8 @@ final class TodosViewModel: ObservableObject {
     self.isEditing = false
     self.performSort()
     self.cancellable = nil
-//    subscribeToTodoChanges()
   }
   
-//  private func subscribeToTodoChanges() {
-//    self.cancellable = self.$todos.dropFirst().sink { [weak self] newTodos in
-//      guard let self else { return }
-//      if self.isEditing { return }
-//      // TODO: you need to update the modified todo, not the entire 100000 object array
-//      self.cdc.update(newTodos)
-//    }
-//  }
   
   func undoButtonTapped()  {
     cancellable = nil
@@ -57,7 +48,6 @@ final class TodosViewModel: ObservableObject {
       let storedTodos = cdc.fetch()
       return .init(uniqueElements: storedTodos ?? [])
     }()
-//    subscribeToTodoChanges()
   }
   
   func redoButtonTapped() {
@@ -69,15 +59,13 @@ final class TodosViewModel: ObservableObject {
   }
   
   func todoCheckBoxTapped(_ todoID: Todo.ID) {
-    guard let todo = todos[id: todoID] else { return }
     todos[id: todoID]!.isComplete.toggle()
-    CoreDataManager.shared.update(todo)
+    CoreDataManager.shared.update(todos[id: todoID]!)
   }
   
   func todoDescriptionChanged(_ todoID: Todo.ID, _ newDescription: String) {
-    guard let todo = todos[id: todoID] else { return }
     todos[id: todoID]!.description = newDescription
-    CoreDataManager.shared.update(todo)
+    CoreDataManager.shared.update(todos[id: todoID]!)
   }
   
   func swipeToDeleteCompleted(_ todo: Todo) {
@@ -102,24 +90,19 @@ final class TodosViewModel: ObservableObject {
     // TODO: // Does this affect CoreData?
   }
   
-  func delete(_ indexSet: IndexSet) {
-    guard let todo = todos.offset
-    withAnimation {
-      todos.remove(atOffsets: indexSet)
-    }
-    CoreDataManager.shared.remove(todo)
-  }
-  
   func clearCompletedButtonTapped() {
+    let newTodos = todos.filter { !$0.isComplete}
     withAnimation {
-      todos = todos.filter { !$0.isComplete}
+      todos = newTodos
     }
+    CoreDataManager.shared.update(newTodos.elements)
   }
   
   func clearAllButtonTapped() {
     withAnimation {
       todos = []
     }
+    CoreDataManager.shared.update([])
   }
   
   func sortOptionTapped(_ newSort: Sort) {
@@ -148,7 +131,8 @@ final class TodosViewModel: ObservableObject {
     }
   }
   
-  func toggleIsCompletedButtonTapped() {
+  func editingToggleSelectedIsCompletedButtonTapped() {
+    if !isEditing { return }
     guard selected.count > 0 && todos.count > 0 else { return }
     let isComplete = !todos[id: selected.first!]!.isComplete
     let newTodos = todos.map { todo in
@@ -162,12 +146,16 @@ final class TodosViewModel: ObservableObject {
     withAnimation {
       todos = .init(uniqueElements: newTodos)
     }
+    CoreDataManager.shared.update(newTodos)
   }
   
-  func deleteSelectedButtonTapped() {
+  func editingDeleteSelectedButtonTapped() {
+    if !isEditing { return }
+    let newTodos = todos.filter { !selected.contains($0.id)}
     withAnimation {
       todos = todos.filter { !selected.contains($0.id)}
     }
+    CoreDataManager.shared.update(newTodos.elements)
   }
   
   func editButtonTapped()  {
@@ -200,7 +188,7 @@ final class TodosViewModel: ObservableObject {
         backupTodos = []
         destination = nil
         isEditing = false
-//        cdc.update(todos)
+        CoreDataManager.shared.update(todos.elements)
       }
       break
     case .none:
@@ -212,7 +200,7 @@ final class TodosViewModel: ObservableObject {
         backupTodos = []
         destination = nil
         isEditing = false
-//        cdc.update(todos)
+        CoreDataManager.shared.update(todos.elements)
       }
       break
     }

@@ -35,7 +35,7 @@ extension TodosView  {
     
     ToolbarItemGroup(placement: .bottomBar) {
       Button {
-        vm.toggleIsCompletedButtonTapped()
+        vm.editingToggleSelectedIsCompletedButtonTapped()
       } label: {
         Image(systemName: vm.selected.count == vm.todos.count ? "checkmark.square" : "square")
       }
@@ -45,7 +45,7 @@ extension TodosView  {
         .foregroundColor(vm.selected.count == 0 ? .secondary : .primary)
       Spacer()
       Button {
-        vm.deleteSelectedButtonTapped()
+        vm.editingDeleteSelectedButtonTapped()
       } label: {
         Image(systemName: "trash")
       }

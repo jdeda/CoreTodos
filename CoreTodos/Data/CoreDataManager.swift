@@ -42,6 +42,7 @@ final class CoreDataManager {
   }
 
   func fetch() -> [Todo]? {
+    resetAll()
     let request = NSFetchRequest<CoreTodo>(entityName: "CoreTodo")
     guard let response = try? container.viewContext.fetch(request)
     else { return nil }
@@ -90,6 +91,21 @@ final class CoreDataManager {
       cd.body = todo.description
       save()
     }
+    container.viewContext.undoManager!.endUndoGrouping()
+  }
+  
+  func update(_ todos: [Todo]) {
+    container.viewContext.undoManager!.beginUndoGrouping()
+    let cds = Array(container.viewContext.registeredObjects) as! [CoreTodo]
+    cds.forEach(container.viewContext.delete)
+    todos.forEach { todo in
+      let coreTodo = CoreTodo(context: container.viewContext)
+      coreTodo.id = todo.id.rawValue
+      coreTodo.body = todo.description
+      coreTodo.isComplete = todo.isComplete
+      container.viewContext.insert(coreTodo)
+    }
+    save()
     container.viewContext.undoManager!.endUndoGrouping()
   }
   

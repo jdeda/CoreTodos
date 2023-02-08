@@ -4,10 +4,10 @@ import SwiftUINavigation
 // MARK: - View
 struct TodosView: View {
   @ObservedObject var vm: TodosViewModel
-  
+
   var body: some View {
     NavigationStack {
-      List(selection: $vm.selected) {
+      List(selection: vm.isEditing ? $vm.selected : .constant([])) {
         ForEach(vm.todos) { todo in
           HStack {
             Button {
@@ -34,7 +34,7 @@ struct TodosView: View {
           .tag(todo.id)
         }
         .onMove(perform: vm.move)
-        .onDelete(perform: vm.delete)
+//        .onDelete(perform: vm.delete)
       }
       .environment(\.editMode, .constant(vm.isEditing ? .active : .inactive))
       .toolbar { toolbar() }
