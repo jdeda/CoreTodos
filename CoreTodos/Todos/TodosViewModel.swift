@@ -6,7 +6,7 @@ import Tagged
 
 // MARK: - ViewModel
 final class TodosViewModel: ObservableObject {
-  @Published var cdc: CoreDataController
+  @Published var cdc: CoreDataManager
   @Published var destination: Destination?
   @Published var todos: IdentifiedArrayOf<Todo>
   @Published var backupTodos: IdentifiedArrayOf<Todo>
@@ -21,7 +21,7 @@ final class TodosViewModel: ObservableObject {
   }
   
   init(
-    cdc: CoreDataController,
+    cdc: CoreDataManager = .shared,
     destination: Destination? = nil,
     todos: IdentifiedArrayOf<Todo>? = nil,
     sort: Sort = .none
@@ -37,59 +37,77 @@ final class TodosViewModel: ObservableObject {
     self.sort = .none
     self.isEditing = false
     self.performSort()
-    self.cancellable = self.$todos.sink { [weak self] newTodos in
-      guard let self else { return }
-      if self.isEditing { return }
-      self.cdc.update(newTodos)
-    }
+    self.cancellable = nil
+//    subscribeToTodoChanges()
   }
   
+//  private func subscribeToTodoChanges() {
+//    self.cancellable = self.$todos.dropFirst().sink { [weak self] newTodos in
+//      guard let self else { return }
+//      if self.isEditing { return }
+//      // TODO: you need to update the modified todo, not the entire 100000 object array
+//      self.cdc.update(newTodos)
+//    }
+//  }
+  
   func undoButtonTapped()  {
-    cdc.undoCommited()
-    self.todos = {
+    cancellable = nil
+    cdc.undo()
+    todos = {
       let storedTodos = cdc.fetch()
-      return .init(uniqueElements: storedTodos != nil ? storedTodos! : [])
+      return .init(uniqueElements: storedTodos ?? [])
     }()
+//    subscribeToTodoChanges()
   }
   
   func redoButtonTapped() {
-    cdc.redoCommited()
-    self.todos = {
+    cdc.redo()
+    todos = {
       let storedTodos = cdc.fetch()
-      return .init(uniqueElements: storedTodos != nil ? storedTodos! : [])
+      return .init(uniqueElements: storedTodos ?? [])
     }()
   }
   
   func todoCheckBoxTapped(_ todoID: Todo.ID) {
-    todos[id: todoID]?.isComplete.toggle()
+    guard let todo = todos[id: todoID] else { return }
+    todos[id: todoID]!.isComplete.toggle()
+    CoreDataManager.shared.update(todo)
   }
   
   func todoDescriptionChanged(_ todoID: Todo.ID, _ newDescription: String) {
-    todos[id: todoID]?.description = newDescription
+    guard let todo = todos[id: todoID] else { return }
+    todos[id: todoID]!.description = newDescription
+    CoreDataManager.shared.update(todo)
   }
   
   func swipeToDeleteCompleted(_ todo: Todo) {
     _ = withAnimation {
       todos.remove(id: todo.id)
     }
+    CoreDataManager.shared.remove(todo)
   }
   
   func newTodoButtonTapped() {
+    let newTodo = Todo(id: .init(), description: "", isComplete: false)
     _ = withAnimation {
       todos.append(.init(id: .init(), description: "", isComplete: false))
     }
+    CoreDataManager.shared.add(newTodo)
   }
   
   func move(_ indexSet: IndexSet, _ newPosition: Int) {
     withAnimation {
       todos.move(fromOffsets: indexSet, toOffset: newPosition)
     }
+    // TODO: // Does this affect CoreData?
   }
   
   func delete(_ indexSet: IndexSet) {
+    guard let todo = todos.offset
     withAnimation {
       todos.remove(atOffsets: indexSet)
     }
+    CoreDataManager.shared.remove(todo)
   }
   
   func clearCompletedButtonTapped() {
@@ -182,7 +200,7 @@ final class TodosViewModel: ObservableObject {
         backupTodos = []
         destination = nil
         isEditing = false
-        cdc.update(todos)
+//        cdc.update(todos)
       }
       break
     case .none:
@@ -194,7 +212,7 @@ final class TodosViewModel: ObservableObject {
         backupTodos = []
         destination = nil
         isEditing = false
-        cdc.update(todos)
+//        cdc.update(todos)
       }
       break
     }

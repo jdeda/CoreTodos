@@ -7,96 +7,32 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "D3A628D6-6FE9-461A-8E4E-C2C558120702"
+            uuid = "A9FB085B-7082-4B0C-A113-DA679858E348"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CoreTodos/CoreData/CoreDataController.swift"
+            filePath = "CoreTodos/Data/CoreDataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "update(_:)"
             landmarkType = "7">
-            <Locations>
-               <Location
-                  uuid = "D3A628D6-6FE9-461A-8E4E-C2C558120702 - 6f474807c6ddac04"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "CoreTodos.CoreDataController.update(IdentifiedCollections.IdentifiedArray&lt;Tagged.Tagged&lt;CoreTodos.Todo, Foundation.UUID&gt;, CoreTodos.Todo&gt;) -&gt; ()"
-                  moduleName = "CoreTodos"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jessededa/Developement/Swift/02_Apps/CoreTodos/CoreTodos/CoreData/CoreDataController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "77"
-                  endingLineNumber = "77"
-                  offsetFromSymbolStart = "70">
-               </Location>
-               <Location
-                  uuid = "D3A628D6-6FE9-461A-8E4E-C2C558120702 - 3c850f9cc1ea3ace"
-                  shouldBeEnabled = "Yes"
-                  ignoreCount = "0"
-                  continueAfterRunningActions = "No"
-                  symbolName = "closure #1 (CoreTodos.Todo) -&gt; CoreTodos.CoreTodo in CoreTodos.CoreDataController.update(IdentifiedCollections.IdentifiedArray&lt;Tagged.Tagged&lt;CoreTodos.Todo, Foundation.UUID&gt;, CoreTodos.Todo&gt;) -&gt; ()"
-                  moduleName = "CoreTodos"
-                  usesParentBreakpointCondition = "Yes"
-                  urlString = "file:///Users/jessededa/Developement/Swift/02_Apps/CoreTodos/CoreTodos/CoreData/CoreDataController.swift"
-                  startingColumnNumber = "9223372036854775807"
-                  endingColumnNumber = "9223372036854775807"
-                  startingLineNumber = "78"
-                  endingLineNumber = "78"
-                  offsetFromSymbolStart = "185">
-               </Location>
-            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "76CCAD91-48C4-4607-9A48-0653F589CD38"
+            uuid = "0C6D0BB9-84B6-4098-8C74-9F9D154E60A3"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CoreTodos/CoreData/CoreDataController.swift"
+            filePath = "CoreTodos/Data/CoreDataController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "52"
-            endingLineNumber = "52"
+            startingLineNumber = "73"
+            endingLineNumber = "73"
             landmarkName = "add(_:)"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "72E0442E-8126-489A-8C79-019E48F31860"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CoreTodos/CoreData/CoreDataController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
-            landmarkName = "fetch()"
-            landmarkType = "7">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            uuid = "C77DC82D-418D-45AB-A0D0-971C8E8DABCA"
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "CoreTodos/CoreData/CoreDataController.swift"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
-            landmarkName = "update(_:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

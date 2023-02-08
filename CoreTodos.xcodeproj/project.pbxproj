@@ -17,7 +17,7 @@
 		976DF59429902B6600B79FEC /* IdentifiedCollections in Frameworks */ = {isa = PBXBuildFile; productRef = 976DF59329902B6600B79FEC /* IdentifiedCollections */; };
 		976DF59629902E5300B79FEC /* TodosToolbar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DF59529902E5300B79FEC /* TodosToolbar.swift */; };
 		976DF5992990415500B79FEC /* MockData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DF5982990415500B79FEC /* MockData.swift */; };
-		976DF5A92991772200B79FEC /* CoreDataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DF5A82991772200B79FEC /* CoreDataController.swift */; };
+		976DF5A92991772200B79FEC /* CoreDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DF5A82991772200B79FEC /* CoreDataManager.swift */; };
 		976DF5B12991DC9600B79FEC /* Todo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 976DF5B02991DC9600B79FEC /* Todo.swift */; };
 		97C65E252991E28C00C823AC /* CoreTodo.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 97C65E232991E28C00C823AC /* CoreTodo.xcdatamodeld */; };
 /* End PBXBuildFile section */
@@ -31,9 +31,9 @@
 		976DF58C29902AFA00B79FEC /* TodosViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosViewModel.swift; sourceTree = "<group>"; };
 		976DF59529902E5300B79FEC /* TodosToolbar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodosToolbar.swift; sourceTree = "<group>"; };
 		976DF5982990415500B79FEC /* MockData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockData.swift; sourceTree = "<group>"; };
-		976DF5A82991772200B79FEC /* CoreDataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataController.swift; sourceTree = "<group>"; };
+		976DF5A82991772200B79FEC /* CoreDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataManager.swift; sourceTree = "<group>"; };
 		976DF5B02991DC9600B79FEC /* Todo.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Todo.swift; sourceTree = "<group>"; };
-		97C65E242991E28C00C823AC /* CoreTodo.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CoreTodo.xcdatamodel; sourceTree = "<group>"; };
+		97C65E242991E28C00C823AC /* CoreTodo.xcdatamodel */ = {isa = PBXFileReference; explicitFileType = wrapper.xcdatamodel; path = CoreTodo.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,7 +101,7 @@
 			children = (
 				976DF5B02991DC9600B79FEC /* Todo.swift */,
 				97C65E232991E28C00C823AC /* CoreTodo.xcdatamodeld */,
-				976DF5A82991772200B79FEC /* CoreDataController.swift */,
+				976DF5A82991772200B79FEC /* CoreDataManager.swift */,
 				976DF5982990415500B79FEC /* MockData.swift */,
 			);
 			path = Data;
@@ -192,7 +192,7 @@
 				976DF58D29902AFA00B79FEC /* TodosViewModel.swift in Sources */,
 				976DF5B12991DC9600B79FEC /* Todo.swift in Sources */,
 				97C65E252991E28C00C823AC /* CoreTodo.xcdatamodeld in Sources */,
-				976DF5A92991772200B79FEC /* CoreDataController.swift in Sources */,
+				976DF5A92991772200B79FEC /* CoreDataManager.swift in Sources */,
 				976DF5992990415500B79FEC /* MockData.swift in Sources */,
 				976DF59629902E5300B79FEC /* TodosToolbar.swift in Sources */,
 			);
