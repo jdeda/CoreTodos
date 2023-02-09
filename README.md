@@ -3,6 +3,25 @@
 ## About
 `CoreTodos` is a simple native iOS app for tracking a list of todos. This app demonstrates `CoreData`, including persistence, undo, and redo functionality.
 
+## Table of Contents
+- [CoreTodos](#coretodos)
+  - [About](#about)
+  - [Features](#features)
+  - [Architecture](#architecture)
+  - [Modeling State](#modeling-state)
+  - [Performing CRUD Operations](#performing-crud-operations)
+    - [Saving](#saving)
+    - [Adding](#adding)
+    - [Remove](#remove)
+    - [Update](#update)
+    - [Update All](#update-all)
+    - [Undo and Redo](#undo-and-redo)
+    - [Interacting With Our ViewModel](#interacting-with-our-viewmodel)
+  - [More](#more)
+  - [Thanks!](#thanks)
+
+<hr> 
+
 ## Features
 **Add, Edit, Remove Todos**
 
