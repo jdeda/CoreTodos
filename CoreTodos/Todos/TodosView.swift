@@ -20,6 +20,8 @@ struct TodosView: View {
               get: { todo.description },
               set: { vm.todoDescriptionChanged(todo.id, $0) }
             ))
+            .autocorrectionDisabled(true)
+            .autocapitalization(UITextAutocapitalizationType.none)
           }
           .foregroundColor(todo.isComplete ? .gray : nil)
           .swipeActions(edge: .trailing) {
@@ -34,7 +36,6 @@ struct TodosView: View {
           .tag(todo.id)
         }
         .onMove(perform: vm.move)
-//        .onDelete(perform: vm.delete)
       }
       .environment(\.editMode, .constant(vm.isEditing ? .active : .inactive))
       .toolbar { toolbar() }

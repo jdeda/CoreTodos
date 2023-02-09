@@ -7,47 +7,47 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "A9FB085B-7082-4B0C-A113-DA679858E348"
-            shouldBeEnabled = "Yes"
+            uuid = "71F7BC91-ADF1-4C67-8BA1-315F3046D5DF"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CoreTodos/Data/CoreDataController.swift"
+            filePath = "CoreTodosTests/TodosViewModelTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
-            landmarkName = "update(_:)"
+            startingLineNumber = "235"
+            endingLineNumber = "235"
+            landmarkName = "testDeleteSelectedTodos()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "0C6D0BB9-84B6-4098-8C74-9F9D154E60A3"
+            uuid = "5EF32E16-83FE-48FD-A4A3-58947E5FFFCA"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
-            filePath = "CoreTodos/Data/CoreDataController.swift"
+            filePath = "CoreTodosTests/TodosViewModelTests.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
-            landmarkName = "add(_:)"
+            startingLineNumber = "301"
+            endingLineNumber = "301"
+            landmarkName = "testDeleteSelectedConfirm()"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            uuid = "88E666FC-F9B4-4B4F-9C55-F547E072C58F"
+            uuid = "21906EFD-0B23-44E3-9CEE-410AD30BD792"
             shouldBeEnabled = "Yes"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "CoreTodos/Todos/TodosViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "44"
-            endingLineNumber = "44"
+            startingLineNumber = "49"
+            endingLineNumber = "49"
             landmarkName = "undoButtonTapped()"
             landmarkType = "7">
          </BreakpointContent>

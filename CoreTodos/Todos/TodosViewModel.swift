@@ -4,6 +4,10 @@ import IdentifiedCollections
 import Combine
 import Tagged
 
+// TODO: selection cant go away
+// TODO: undo while editing can crash
+// TODO: order is not preserved...
+
 // MARK: - ViewModel
 final class TodosViewModel: ObservableObject {
   @Published var cdc: CoreDataManager
@@ -13,7 +17,6 @@ final class TodosViewModel: ObservableObject {
   @Published var selected: Set<Todo.ID>
   @Published var sort: Sort
   @Published var isEditing: Bool
-  @Published var cancellable: AnyCancellable? = nil
   
   var navigationTitle: String {
     let status = isEditing && selected.count > 0
@@ -37,12 +40,10 @@ final class TodosViewModel: ObservableObject {
     self.sort = .none
     self.isEditing = false
     self.performSort()
-    self.cancellable = nil
   }
   
-  
+  // MARK:  - Undos...but when i relaunch i did not get undo..how?
   func undoButtonTapped()  {
-    cancellable = nil
     cdc.undo()
     todos = {
       let storedTodos = cdc.fetch()
@@ -78,7 +79,7 @@ final class TodosViewModel: ObservableObject {
   func newTodoButtonTapped() {
     let newTodo = Todo(id: .init(), description: "", isComplete: false)
     _ = withAnimation {
-      todos.append(.init(id: .init(), description: "", isComplete: false))
+      todos.append(newTodo)
     }
     CoreDataManager.shared.add(newTodo)
   }
@@ -146,7 +147,6 @@ final class TodosViewModel: ObservableObject {
     withAnimation {
       todos = .init(uniqueElements: newTodos)
     }
-    CoreDataManager.shared.update(newTodos)
   }
   
   func editingDeleteSelectedButtonTapped() {
@@ -155,7 +155,6 @@ final class TodosViewModel: ObservableObject {
     withAnimation {
       todos = todos.filter { !selected.contains($0.id)}
     }
-    CoreDataManager.shared.update(newTodos.elements)
   }
   
   func editButtonTapped()  {
@@ -184,23 +183,23 @@ final class TodosViewModel: ObservableObject {
     switch alertAction {
     case .confirmChanges:
       if !isEditing { break }
+      CoreDataManager.shared.update(todos.elements)
       withAnimation {
         backupTodos = []
         destination = nil
         isEditing = false
-        CoreDataManager.shared.update(todos.elements)
       }
       break
     case .none:
       break
     case .some(.cancelChanges):
       if !isEditing { break }
+      CoreDataManager.shared.update(backupTodos.elements)
       withAnimation {
         todos = backupTodos
         backupTodos = []
         destination = nil
         isEditing = false
-        CoreDataManager.shared.update(todos.elements)
       }
       break
     }

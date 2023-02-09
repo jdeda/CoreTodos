@@ -2,7 +2,10 @@ import Foundation
 import CoreData
 import IdentifiedCollections
 
-final class CoreDataManager {
+///
+/// Manages CoreData directly, supporting a static instance, and CRUD operations.
+///
+struct CoreDataManager {
   static let shared = CoreDataManager()
 
   let container: NSPersistentContainer
@@ -28,7 +31,7 @@ final class CoreDataManager {
     }
   }
 
-  private func resetAll() {
+  func resetAll() {
     deleteAll()
     container.viewContext.undoManager = .init()
   }
@@ -42,7 +45,7 @@ final class CoreDataManager {
   }
 
   func fetch() -> [Todo]? {
-    resetAll()
+//    resetAll()
     let request = NSFetchRequest<CoreTodo>(entityName: "CoreTodo")
     guard let response = try? container.viewContext.fetch(request)
     else { return nil }
@@ -111,9 +114,11 @@ final class CoreDataManager {
   
   func undo() {
     container.viewContext.undoManager!.undo()
+    save()
   }
   
   func redo() {
     container.viewContext.undoManager!.redo()
+    save()
   }
 }
