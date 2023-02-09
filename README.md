@@ -22,13 +22,9 @@ Todos can be multi-selected for toggling their completion status or deleted. The
 <img src="GitAssets/coreTodos_demo_select_toggle_confirm_undo_persist_AdobeExpress.gif" width="250"/>
 </div>
 
-<hr>
-
 ## Architecture
 **MVVM && PointFree Dependencies**
 This app is built using MVVM and CoreData alongside several of [PointFree's]() dependencies, including [SwiftUI-Navigation](https://github.com/pointfreeco/swiftui-navigation), [Identified-Collections](https://github.com/pointfreeco/swift-identified-collections), and [Tagged](https://github.com/pointfreeco/swift-tagged). [Check out my other repo for an indepth look into their SwiftUI-Navigation combined with MVVM.]()
-
-<hr>
 
 ## Modeling State
 The highlight of this app is simply CoreData. Using this library, we can persist our data *locally*, that is, on our device. We are simply managing a list of todos with `CRUD` operations, undo, and redo. A todo has a unique ID, a description, and a flag determining if the todo is complete or not. Our Swift type would appear as such:
@@ -88,10 +84,10 @@ struct CoreDataManager {
 }
 ```
 
-### Performing CRUD Operations
+## Performing CRUD Operations
 Before we write code for our CRUD operations, we need to decide how we manage our CoreData -- either directly within the Persistent Container's Managed Object Context, or we could store another data structure, such as an array of our CoreTodos. For the simplicity of this app, I stuck to interacting with the object context directly, so there is no need to add a property nor the logic to update that property to the CoreDataManager.
 
-#### Saving
+### Saving
 It is very important to make sure to save any uncommited changes to the managed object context. If we perform CRUD operations to it, but do not save, our data will not be persisted. We can this by implementing our `save()` function:
 ```swift
   private func save() {
@@ -103,7 +99,7 @@ It is very important to make sure to save any uncommited changes to the managed 
     }
 ```
 
-#### Adding
+### Adding
 Next, we'd like to perist our Todos. We can implement our `add` function as such:
 ```swift
   func add(_ newTodo: Todo) {
@@ -145,7 +141,7 @@ But may still be wondering, what is grouping? Grouping is simply the collection 
 ```
 Now this will probably get your mind racing because of all the possible permuations of mutations and bad things that could occur if one played with grouping. For the purposes of this app, I will not go into an indepth discussion or analysis on this.
 
-#### Remove
+### Remove
 We implement `remove` as follows:
 ```swift
   func remove(_ todo: Todo) {
@@ -163,7 +159,7 @@ We implement `remove` as follows:
 ```
 As mentioned before, I chose not to manage my own collection of CoreTodos, but instead to simply reference the managed object context directly. To get its objects, we access the `registeredObjects` property and force cast it as a `CoreTodo` We then search that array for the first object we come across,  then delete it from the context and save our changes.
 
-#### Update
+### Update
 We can implement `update`  very similar to delete, except we update the first object we found:
 ```swift
   func update(_ todo: Todo) {
@@ -178,7 +174,7 @@ We can implement `update`  very similar to delete, except we update the first ob
   }
 ```
 
-#### Update All
+### Update All
 In some occassions, we want to update, or really, replace all the todos. We can do so as such:
 ```swift
 func update(_ todos: [Todo]) {
@@ -198,7 +194,7 @@ func update(_ todos: [Todo]) {
 Here we delete all of our data from memory, create them again, then save.
 
 
-#### Undo and Redo
+### Undo and Redo
 Both of these are very simple lines, thanks to CoreData. It's doing all the heavy work, all we had to do was track when to track undoing:
 ```swift
   func undo() {
@@ -212,7 +208,7 @@ Both of these are very simple lines, thanks to CoreData. It's doing all the heav
   }
 ```
 
-#### Interacting With Our ViewModel
+### Interacting With Our ViewModel
 Now, we could build our view and view model just as we'd build any other simple app, without having to really worry about CoreData controlling how we do things. Whenever we perform logic on our `Todo`s, we can reach out to our `CoreDataManager.shared` instance, and call a method for a CRUD operation. 
 
 
@@ -220,3 +216,8 @@ Now, we could build our view and view model just as we'd build any other simple 
 Some future features that would be neat:
 1. Preserve ordering in CoreData. CoreData is stored and retrieved in a nondeterministic way, app currently does not support proper ordering
 2. On check, sort todos. Todos that are completed should float to the bottom, and continuously clicking todos checkboxes or editing their descriptions should debounce the effect
+
+## Thanks!
+Thanks for checking out the repo! Try running the app to see all the features and more for yourself!
+
+
