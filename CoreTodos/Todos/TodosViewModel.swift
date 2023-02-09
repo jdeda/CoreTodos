@@ -188,6 +188,7 @@ final class TodosViewModel: ObservableObject {
         backupTodos = []
         destination = nil
         isEditing = false
+        selected = []
       }
       break
     case .none:
@@ -200,6 +201,7 @@ final class TodosViewModel: ObservableObject {
         backupTodos = []
         destination = nil
         isEditing = false
+        selected = []
       }
       break
     }
