@@ -7,7 +7,7 @@ struct TodosView: View {
 
   var body: some View {
     NavigationStack {
-      List(selection: vm.isEditing ? $vm.selected : .constant([])) {
+        List(selection: $vm.selected) {
         ForEach(vm.todos) { todo in
           HStack {
             Button {
@@ -23,6 +23,7 @@ struct TodosView: View {
             .autocorrectionDisabled(true)
             .autocapitalization(UITextAutocapitalizationType.none)
           }
+          .listRowBackground(Color("listbackgroundColor"))
           .foregroundColor(todo.isComplete ? .gray : nil)
           .swipeActions(edge: .trailing) {
             Button(role: .destructive) {

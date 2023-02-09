@@ -5,7 +5,6 @@ import Combine
 import Tagged
 
 // TODO: selection cant go away
-// TODO: undo while editing can crash
 // TODO: order is not preserved...
 
 // MARK: - ViewModel
@@ -60,11 +59,15 @@ final class TodosViewModel: ObservableObject {
   }
   
   func todoCheckBoxTapped(_ todoID: Todo.ID) {
+    guard let _ = todos[id: todoID]
+    else { return }
     todos[id: todoID]!.isComplete.toggle()
     CoreDataManager.shared.update(todos[id: todoID]!)
   }
   
   func todoDescriptionChanged(_ todoID: Todo.ID, _ newDescription: String) {
+    guard let _ = todos[id: todoID]
+    else { return }
     todos[id: todoID]!.description = newDescription
     CoreDataManager.shared.update(todos[id: todoID]!)
   }

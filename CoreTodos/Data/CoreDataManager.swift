@@ -45,7 +45,6 @@ struct CoreDataManager {
   }
 
   func fetch() -> [Todo]? {
-//    resetAll()
     let request = NSFetchRequest<CoreTodo>(entityName: "CoreTodo")
     guard let response = try? container.viewContext.fetch(request)
     else { return nil }

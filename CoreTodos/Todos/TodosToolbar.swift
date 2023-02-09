@@ -90,13 +90,17 @@ extension TodosView  {
           Text("Clear all")
         }
         Menu {
-          Picker("Sort", selection: .init(
-            get: { vm.sort},
-            set: { vm.sortOptionTapped($0)}
-          )) {
+//          Picker("Sort", selection: .init(
+//            get: { vm.sort},
+//            set: { vm.sortOptionTapped($0)}
+//          )) {
             ForEach(TodosViewModel.Sort.allCases, id: \.self) { sort in
-              Text(sort.string)
-            }
+              Button  {
+                vm.sortOptionTapped(sort)
+              } label: {
+                Text(sort.string)
+              }
+//            }
           }
         } label: {
           Text("Sort")
