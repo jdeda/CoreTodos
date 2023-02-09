@@ -4,9 +4,6 @@ import IdentifiedCollections
 import Combine
 import Tagged
 
-// TODO: selection cant go away
-// TODO: order is not preserved...
-
 // MARK: - ViewModel
 final class TodosViewModel: ObservableObject {
   @Published var cdc: CoreDataManager
@@ -15,6 +12,7 @@ final class TodosViewModel: ObservableObject {
   @Published var backupTodos: IdentifiedArrayOf<Todo>
   @Published var selected: Set<Todo.ID>
   @Published var sort: Sort
+  @Published var filter: Filter = .none
   @Published var isEditing: Bool
   
   var navigationTitle: String {
@@ -154,7 +152,6 @@ final class TodosViewModel: ObservableObject {
   
   func editingDeleteSelectedButtonTapped() {
     if !isEditing { return }
-    let newTodos = todos.filter { !selected.contains($0.id)}
     withAnimation {
       todos = todos.filter { !selected.contains($0.id)}
     }
@@ -236,6 +233,23 @@ extension TodosViewModel {
       case .completed: return "Completed"
       case .incompleted: return "Incompleted"
       case .none: return "None"
+      }
+    }
+  }
+}
+
+// MARK: - TodosViewModel.Filter
+extension TodosViewModel {
+  enum Filter: CaseIterable {
+    case none
+    case completed
+    case incompleted
+    
+    var string: String {
+      switch self {
+        case .none: return "All"
+        case .completed: return "Completed"
+        case .incompleted: return "Incompleted"
       }
     }
   }

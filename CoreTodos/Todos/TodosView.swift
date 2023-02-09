@@ -7,7 +7,7 @@ struct TodosView: View {
 
   var body: some View {
     NavigationStack {
-        List(selection: $vm.selected) {
+      List(selection: vm.isEditing ? $vm.selected : .constant([])) {
         ForEach(vm.todos) { todo in
           HStack {
             Button {
