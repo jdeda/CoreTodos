@@ -1,5 +1,7 @@
 # CoreTodos
 
+<img src="GitAssets/coreTodos_banner.png" alt="drawing" width="650"/>
+
 ## About
 `CoreTodos` is a simple native iOS app for tracking a list of todos. This app demonstrates `CoreData`, including persistence, undo, and redo functionality.
 
