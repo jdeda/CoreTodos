@@ -45,6 +45,7 @@ Todos can be multi-selected for toggling their completion status or deleted. The
 
 ## Architecture
 **MVVM && PointFree Dependencies**
+
 This app is built using MVVM and CoreData alongside several of [PointFree's]() dependencies, including [SwiftUI-Navigation](https://github.com/pointfreeco/swiftui-navigation), [Identified-Collections](https://github.com/pointfreeco/swift-identified-collections), and [Tagged](https://github.com/pointfreeco/swift-tagged). [Check out my other repo for an indepth look into their SwiftUI-Navigation combined with MVVM.]()
 
 ## Modeling State
